@@ -1,0 +1,29 @@
+&input_num
+! seq (MC steps until eq.), spm (MC steps per measurement), nms (no. measurements) 
+ seq=100  spm=1  nms=2000
+! iobs (1-Hx, 2-Hy, 3-Hz, 4-T), obsmin, obsmax, obspoints (overrule values in next line)
+ iobs=4  obsmin=80  obsmax=20  obspoints=10
+! H(x), H(y), H(z), T
+ hh=0.0 0.0 0.0   TT=100
+! random seed
+ seed=32143
+! imodel (1-Ising, 2-XY, 3-3D-Heisen), ibc (boundary cond., <0-free, 0-xyz, 1-x, 2-y, 3-z, 12-xy...)
+ imodel=3  ibc=0
+! sp_init (1-x, 2-y, 3-z, 4-random), l_init (>0: call init.config for each T-step), lmc (>0: lattice sweep)
+ sp_init=4  l_init=-2  lmc=99
+! nadj_acc,snew_scale, safe_sp
+ nadj_acc=5  snew_scale=100.0  safe_sp=-99 
+! allocjij (1,2,3), njscale, distcut
+ allocjij=3  njscale=5
+! ipara (1,2); 1 - temperture loop, 2 - geometric cluster parallelization
+ iparallel=1
+! optional parameters:
+ printfullmoments=.true.    ! default is .false.
+! structure file (Length 50);
+! struct.in or file.str or for any other name program will
+! looking for the file name and interprete as HUTSEPOT input file
+ strfile="file.str"         ! default or e.g. strfile="file.str" 
+! cpa flag, explicilty for the HUTSEPOT case; default is off (0) 
+ cpa=0
+ onlymagsites=.TRUE.
+/
