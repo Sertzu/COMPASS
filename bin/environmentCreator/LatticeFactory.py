@@ -21,10 +21,11 @@ class Cell:
         for atom in atomsInCell:
             if onlyMag:
                 if atom[3]:
-                    self.atoms[atom[1]] = [atom[0], atom[2], atom[3], unique_id + counter]
+                    # atom[1] = type, atom[0] = handle, atom[2] = tau, unique identifier, current index
+                    self.atoms[atom[1]] = [atom[0], atom[2], atom[3], unique_id + counter, counter]
                     counter += 1
             else:
-                self.atoms[atom[1]] = [atom[0], atom[2], atom[3], unique_id + counter]
+                self.atoms[atom[1]] = [atom[0], atom[2], atom[3], unique_id + counter, num]
                 counter += 1
 
 
@@ -32,6 +33,7 @@ class LatticeFactory:
     def __init__(self, inputs: InputReader, simBoxLength: int):
         mode = "simprepLegacy"
 
+        self.Jijs = inputs.Jijs.values.tolist()
         self.latticeParameterA = inputs.structureRaw[0][0]
         self.latticeParameterB = inputs.structureRaw[0][1]
         self.latticeParameterC = inputs.structureRaw[0][2]
@@ -45,4 +47,20 @@ class LatticeFactory:
                 for j in range(self.simBoxLength):
                     for k in range(self.simBoxLength):
                         self.simBox[i][j][k] = Cell(self.sites, 1, i, j, k, self.simBoxLength)
+
+            firstcell = self.simBox[0][0][0]
+            for i, element in enumerate(self.Jijs):
+                source = element[0]
+                dx,dy,dz = tuple(element[7:10])
+                tau_source = firstcell.atoms[source][1]
+                x_source, y_source, z_source = (self.latticeParameterA*tau_source[0], self.latticeParameterB*tau_source[1], self.latticeParameterC*tau_source[2])
+                x_target, y_target, z_target = (x_source + dx, y_source + dy, z_source + dz)
+                rel_cell_x, rel_cell_y, rel_cell_z = (round(x_target/self.latticeParameterA),round(y_target/self.latticeParameterB),round(z_target/self.latticeParameterC))
+                self.Jijs[i].append(0)
+                self.Jijs[i].append(0)
+                self.Jijs[i].append(0)
+                self.Jijs[i].append(rel_cell_x)
+                self.Jijs[i].append(rel_cell_y)
+                self.Jijs[i].append(rel_cell_z)
+        # self.Jijs = np.ndarray(self.Jijs,dtype=float)
 

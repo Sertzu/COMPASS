@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="33e00db5-aac1-472c-ac2d-d275da4d3ba6" name="Changes" comment="Folder structure and first Input tests.">
-      <change afterPath="$PROJECT_DIR$/bin/environmentCreator/InputReader.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/environmentCreator/LatticeFactory.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/inputs/Jij_from_Hutsepot/Jij_final.dat" afterDir="false" />
+    <list default="true" id="33e00db5-aac1-472c-ac2d-d275da4d3ba6" name="Changes" comment="Expanded Folder structure and added new classes for lattice generation">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/environmentCreator/CreateSimEnvironment.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/environmentCreator/LatticeFactory.py" beforeDir="false" afterPath="$PROJECT_DIR$/bin/environmentCreator/LatticeFactory.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testScript.py" beforeDir="false" afterPath="$PROJECT_DIR$/testScript.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -32,9 +33,11 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/testScript.py" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../MasterarbeitMonteCarlo" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -80,7 +83,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681998302378</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Expanded Folder structure and added new classes for lattice generation">
+      <created>1682004882428</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1682004882428</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -93,21 +103,40 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Folder structure and first Input tests." />
-    <option name="LAST_COMMIT_MESSAGE" value="Folder structure and first Input tests." />
+    <MESSAGE value="Expanded Folder structure and added new classes for lattice generation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Expanded Folder structure and added new classes for lattice generation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/testScript.py</url>
-          <line>9</line>
+          <line>7</line>
           <option name="timeStamp" value="24" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/bin/environmentCreator/CreateSimEnvironment.py</url>
+          <line>26</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
       </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="self.myLattice" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
