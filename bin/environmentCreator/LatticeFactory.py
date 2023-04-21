@@ -1,6 +1,6 @@
 from bin.environmentCreator.InputReader import InputReader
 import numpy as np
-
+from math import floor
 
 class Cell:
     def __init__(self, atomsInCell, onlyMag, i, j, k, L):
@@ -55,12 +55,10 @@ class LatticeFactory:
                 tau_source = firstcell.atoms[source][1]
                 x_source, y_source, z_source = (self.latticeParameterA*tau_source[0], self.latticeParameterB*tau_source[1], self.latticeParameterC*tau_source[2])
                 x_target, y_target, z_target = (x_source + dx, y_source + dy, z_source + dz)
-                rel_cell_x, rel_cell_y, rel_cell_z = (round(x_target/self.latticeParameterA),round(y_target/self.latticeParameterB),round(z_target/self.latticeParameterC))
+                rel_cell_x, rel_cell_y, rel_cell_z = (floor(x_target/self.latticeParameterA), floor(y_target/self.latticeParameterB), floor(z_target/self.latticeParameterC))
                 self.Jijs[i].append(0)
                 self.Jijs[i].append(0)
                 self.Jijs[i].append(0)
                 self.Jijs[i].append(rel_cell_x)
                 self.Jijs[i].append(rel_cell_y)
                 self.Jijs[i].append(rel_cell_z)
-        # self.Jijs = np.ndarray(self.Jijs,dtype=float)
-
