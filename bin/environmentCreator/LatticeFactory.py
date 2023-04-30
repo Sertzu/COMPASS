@@ -37,6 +37,9 @@ class LatticeFactory:
         self.latticeParameterA = inputs.structureRaw[0][0]
         self.latticeParameterB = inputs.structureRaw[0][1]
         self.latticeParameterC = inputs.structureRaw[0][2]
+        self.unitVectorA = self.latticeParameterA * inputs.structureRaw[1].values[0]
+        self.unitVectorB = self.latticeParameterB * inputs.structureRaw[1].values[1]
+        self.unitVectorC = self.latticeParameterC * inputs.structureRaw[1].values[2]
         self.simBoxLength = simBoxLength
         self.sites = inputs.structureRaw[2].values
 
@@ -52,9 +55,19 @@ class LatticeFactory:
             for i, element in enumerate(self.Jijs):
                 source = element[0]
                 dx,dy,dz = tuple(element[7:10])
+
                 tau_source = firstcell.atoms[source][1]
-                x_source, y_source, z_source = (self.latticeParameterA*tau_source[0], self.latticeParameterB*tau_source[1], self.latticeParameterC*tau_source[2])
-                x_target, y_target, z_target = (x_source + dx, y_source + dy, z_source + dz)
+                xyz_source = self.unitVectorA * tau_source[0] + self.unitVectorB * tau_source[1] + self.unitVectorC * tau_source[2]
+                xyz_target = np.array([xyz_source[0] + dx, xyz_source[1] + dy, xyz_source[2] + dz])
+
+                # Create the matrix with A, B, and C as columns
+                ABC_matrix = np.column_stack((self.unitVectorA, self.unitVectorB, self.unitVectorC))
+
+                # Invert the matrix
+                inv_ABC_matrix = np.linalg.inv(ABC_matrix)
+
+                # Calculate the (j, k, l) vector
+                jkl = np.matmul(inv_ABC_matrix, xyz_target)
                 rel_cell_x, rel_cell_y, rel_cell_z = (floor(x_target/self.latticeParameterA), floor(y_target/self.latticeParameterB), floor(z_target/self.latticeParameterC))
                 self.Jijs[i].append(0)
                 self.Jijs[i].append(0)

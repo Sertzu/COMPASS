@@ -45,7 +45,7 @@ class CreateSimEnvironment:
                 formatted_row = ""
                 for value in row:
                     if isinstance(value, int):
-                        formatted_value = "{: >5}".format(value)  # Reserve 5 spaces for integers
+                        formatted_value = "{: >8}".format(value)  # Reserve 5 spaces for integers
                     elif isinstance(value, float):
                         formatted_value = "{: >12.6f}".format(
                             value)  # Reserve 10 spaces for floats, with 6 decimal places
