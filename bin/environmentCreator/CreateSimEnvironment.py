@@ -16,9 +16,9 @@ class CreateSimEnvironment:
         Jijs = self.myLattice.Jijs
         simBox = self.myLattice.simBox
 
-        latA = self.myLattice.latticeParameterA
-        latB = self.myLattice.latticeParameterB
-        latC = self.myLattice.latticeParameterC
+        latA = self.myLattice.unitVectorA
+        latB = self.myLattice.unitVectorB
+        latC = self.myLattice.unitVectorC
 
         for z in range(self.simboxLength):
             for y in range(self.simboxLength):
@@ -28,12 +28,12 @@ class CreateSimEnvironment:
                             source = simBox[x][y][z].atoms[element[0]]
                             rel_cell_x, rel_cell_y, rel_cell_z = tuple(element[16:19])
                             corr_x, corr_y, corr_z = (floor(((x + rel_cell_x)/self.simboxLength)), floor(((y + rel_cell_y)/self.simboxLength)), (floor((z + rel_cell_z)/self.simboxLength)))
-                            wrap_x, wrap_y, wrap_z = (corr_x*self.simboxLength*latA, corr_y*self.simboxLength*latB, corr_z*self.simboxLength*latC)
+                            wrap_xyz = (corr_x * latA + corr_y * latB + corr_z * latC) * self.simboxLength
                             target = simBox[(x + rel_cell_x) % self.simboxLength][(y + rel_cell_y) % self.simboxLength][(z + rel_cell_z) % self.simboxLength].atoms[element[2]]
                             source_id = source[3]
                             target_id = target[3]
                             Jvalue = element[12]
-                            x_val, y_val, z_val = (element[7] - wrap_x, element[8] - wrap_y, element[9] - wrap_z)
+                            x_val, y_val, z_val = (element[7] - wrap_xyz[0], element[8] - wrap_xyz[1], element[9] - wrap_xyz[2])
                             self.atomPairing.append([source_id + 1, element[0], target_id + 1, element[2], x_val, y_val, z_val, euclidean_distance(x_val, y_val, z_val), Jvalue])
 
         self.atomPairing.sort(key=lambda x: (x[0], x[2]))

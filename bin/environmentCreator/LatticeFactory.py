@@ -68,7 +68,7 @@ class LatticeFactory:
 
                 # Calculate the (j, k, l) vector
                 jkl = np.matmul(inv_ABC_matrix, xyz_target)
-                rel_cell_x, rel_cell_y, rel_cell_z = (floor(x_target/self.latticeParameterA), floor(y_target/self.latticeParameterB), floor(z_target/self.latticeParameterC))
+                rel_cell_x, rel_cell_y, rel_cell_z = (floor(jkl[0]), floor(jkl[1]), floor(jkl[2]))
                 self.Jijs[i].append(0)
                 self.Jijs[i].append(0)
                 self.Jijs[i].append(0)
